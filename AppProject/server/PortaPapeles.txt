@@ -1,0 +1,16 @@
+
+solo la pizza creada para el cliente tendrá la facultad de tener un boolean terminado o completado
+
+
+pendiente, cancelado, terminado 
+
+
+desde el pedidod debe poder irse a ver los ingredientes de este pedido
+
+
+
+hacer que al actualizar cualquier ingrediente u objeto que complementa la pizza, todas las pizzas actualicen su precio
+
+revisar porqué no se actualiza bien el interfaz de las pizzas en la interfaz adm
+
+

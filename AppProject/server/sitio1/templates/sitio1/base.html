@@ -1,0 +1,142 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop - Tu tienda de productos para mascotas</title>
+    <link rel="stylesheet" href="{% static 'sitio1/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PetSociety</div><li><a >{{ user.username }}</a></li>
+            
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="button" style="background: none; border: none; color: inherit; cursor: pointer; text-decoration: underline;" onclick="confirmLogout()">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                </li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                {% endif %}
+                <li><a href="">Agenda tu Cita</a></li>
+                <li><a href="{% url 'index' %}">Productos</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="carousel" class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img src="{% static 'sitio1/imagenes/perrofacha.jpg' %}" alt="Slide 1">
+                    <div class="carousel-caption">
+                        <h1>Bienvenido a PetSociety</h1>
+                        <p>Tu tienda de confianza para productos de mascotas</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="{% static 'sitio1/imagenes/perro2.jpg' %}" alt="Slide 2">
+                    <div class="carousel-caption">
+                        <h1>Calidad y Confianza</h1>
+                        <p>Los mejores productos para tus mascotas.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="{% static 'sitio1/imagenes/perro.jpg' %}" alt="Slide 3">
+                    <div class="carousel-caption">
+                        <h1>Atención Personalizada</h1>
+                        <p>Nos preocupamos por el bienestar de tus mascotas.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
+        </section>
+
+        <section id="productos" class="productos">
+            <h2>Nuestros Productos</h2>
+            <div class="producto-grid">
+                <div class="producto-card">
+                    <img src="{% static 'sitio1/imagenes/correa_perros.jpg'%}" alt="Collar para perros">
+                    <h3>Correa para perros</h3>
+                    <p>Correa para Perros: Resistente y cómoda, ideal para paseos seguros y controlados. Fabricada con materiales duraderos y con un agarre ergonómico que facilita su manejo. Perfecta para perros de todas las edades y tamaños.</p>
+                    <p class="precio">$10.000</p>
+                    <button>Añadir al carrito</button>
+                </div>
+                <div class="producto-card">
+                    <img src="{% static 'sitio1/imagenes/comida_para_gato.jpg'%}" alt="comida para gatos">
+                    <h3>comida para gatos</h3>
+                    <p>Alimento Premium para Gatos: Nutritivo y delicioso, formulado con ingredientes naturales de alta calidad. Rico en proteínas, vitaminas y minerales para mantener la salud, el brillo del pelaje y la energía de tu gato.</p>
+                    <p class="precio">$20.000</p>
+                    <button>Añadir al carrito</button>
+                </div>
+                <div class="producto-card">
+                    <img src="{% static 'sitio1/imagenes/comida_para_perro.jpg'%}" alt="Comida premium para perros">
+                    <h3>Comida premium para perros</h3>
+                    <p>Alimento Premium para Perros: Equilibrado y sabroso, hecho con ingredientes naturales para fortalecer el sistema inmunológico y mantener el pelaje brillante. Proporciona proteínas y nutrientes esenciales para una vida activa y saludable.</p>
+                    <p class="precio">$30.000</p>
+                    <button>Añadir al carrito</button>
+                </div>
+                <div class="producto-card">
+                    <img src="{% static 'sitio1/imagenes/juguete_gato.jpg'%}" alt="juguete gato">
+                    <h3>juguete gatos</h3>
+                    <p>Rascador para Gatos: Ideal para que tu gato afile sus garras y libere energía. Con postes cubiertos de sisal resistente y plataformas cómodas para descansar, ayuda a proteger tus muebles y mantiene a tu gato entretenido y activo.</p>
+                    <p class="precio">$30.000</p>
+                    <button>Añadir al carrito</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="nosotros">
+            <h2>Sobre Nosotros</h2>
+            <p>En nuestra veterinaria, nos dedicamos al cuidado integral de la salud de tus mascotas. Ofrecemos una amplia gama de servicios médicos, que incluyen consultas generales, vacunación, desparasitación, cirugías, análisis clínicos y atención de emergencias. Nuestro equipo de veterinarios altamente capacitados trabaja con compromiso y cariño para brindarle a tu mascota el mejor tratamiento posible.
+
+                Además de nuestros servicios médicos, contamos con planes de bienestar para el seguimiento preventivo de la salud de tu mascota, ayudándote a mantenerla sana y feliz. También disponemos de una tienda con productos especializados, desde alimentos hasta accesorios, para satisfacer todas sus necesidades.
+                
+                ¡Confía en nosotros para el cuidado de tu mascota!</p>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 PetSociety. Todos los derechos reservados.</p>
+    </footer>
+</body>
+<script>let currentSlide = 0;
+    function confirmLogout() {
+        if (confirm("¿Estás seguro de que quieres cerrar sesión?")) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+
+    function showSlide(index) {
+        const slides = document.querySelectorAll('.carousel-slide');
+        if (index >= slides.length) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = slides.length - 1;
+        } else {
+            currentSlide = index;
+        }
+        const offset = -currentSlide * 100;
+        document.querySelector('.carousel-container').style.transform = `translateX(${offset}%)`;
+    }
+    
+    function moveSlide(direction) {
+        showSlide(currentSlide + direction);
+    }
+    
+    // Auto slide every 5 seconds
+    setInterval(() => {
+        moveSlide(1);
+    }, 5000);</script>
+</html>

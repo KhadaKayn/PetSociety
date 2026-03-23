@@ -1,0 +1,102 @@
+{% extends 'sitio1/base.html' %}
+{% load static %}
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'sitio1/js/script.js' %}"></script>
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'sitio1/css/style.css'%}">
+{% endblock %}
+
+
+{% block content %}
+    {% load humanize %}
+    <section id="menu" class="menu">
+        <h2 class="heading">Productos</h2>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Descripcion</th>
+                    
+                    <th>Precio</th>
+                    
+                    <th>Stock</th>
+                    <th>Stock optimo</th>
+                    <th>Promedio Ventas por Día</th>
+                    
+                    
+                    
+                </tr>
+                </thead>
+                <tbody>
+                  {% for u in productos %}
+                  <tr>
+                      <td>{{ u.nombre|default_if_none:"N/A" }}</td>
+                      {% if u.imagen %}
+                          <td><img src="{{ u.imagen.url }}" alt="" style="max-width: 100px; max-height: 100px;"></td>
+                      {% else %}
+                          <td><p>No hay imagen disponible</p></td>
+                      {% endif %}
+                      <td>{{ u.descripcion|default_if_none:"No disponible" }}</td>
+                      
+                      <td>{{ u.precio|default_if_none:"N/A" }}</td>
+                      
+                      <td>{{ u.stock|default_if_none:"N/A" }}</td>
+                      <td>{{ u.stock_optimo|default_if_none:"N/A" }}</td>
+                      <td>{{ u.promedio_ventas_dia|default_if_none:"N/A" }}</td>
+                      
+                      
+                  </tr>
+              {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+  <section class="footer">
+
+    <!--<div class="box-container">
+
+      <div class="box">
+        <i ></i>
+        <h3>Agregar Producto</h3>
+        <p>+123-456-7890</p>
+        <p>+111-222-3333</p>
+      </div>
+
+      <div class="box">
+        <i class="fas fa-map-marker-alt"></i>[]
+        <h3>Nuestra Direccion</h3>
+        <p>Av.Concha y Toro, Puente Alto</p>
+      </div>
+
+      <div class="box">
+        <i class="fas fa-clock"></i>
+        <h3>XD</h3>
+        <p>c:</p>
+      </div>
+
+      <div class="box">
+        <i class="fas fa-envelope"></i>
+        <h3>Correo electronico</h3>
+        <p>ola q ase</p>
+        <p>lol</p>
+      </div>
+
+    </div>
+  -->
+    
+
+  </section>
+
+
+{% endblock %}

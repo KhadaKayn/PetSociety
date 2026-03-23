@@ -1,0 +1,62 @@
+{% extends 'sitio1/base.html' %}
+{% load static %}
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'sitio1/js/script.js' %}"></script>
+    <script>
+
+        function realizarPedido() {
+            alert("¡La función de realizar pedido está en desarrollo!");
+        }
+    </script>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'sitio1/css/style.css'%}">
+{% endblock %}
+
+{% block content %}
+    {% load humanize %}
+    {% if datos %}
+        <div class="container">
+            <h2 class="mt-4 mb-3">{{ datos.nombre | title }}</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    {% if datos.imagen %}
+                        <img src="{{ datos.imagen.url }}" alt="{{ datos.nombre }}" class="img-fluid mb-4">
+                    {% else %}
+                        <h2 class="mt-4 mb-3">No hay imagenes disponibles</h2>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="width: 135%;">
+                        <tbody>
+                            <tr>
+                                <th style="font-size: 1.2em;">Descripción</th>
+                                <td style="font-size: 1.1em;">{{ datos.descripcion | capfirst }}</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 1.2em;">Tamaño</th>
+                                <td style="font-size: 1.1em;">{{ datos.tamano.nombre | title }}</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 1.2em;">Tipo de Masa</th>
+                                <td style="font-size: 1.1em;">{{ datos.tipo_masa.nombre | title }}</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 1.2em;">Precio</th>
+                                <td style="font-size: 1.1em;">${{ datos.precio | intcomma }} CLP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- Botón "Realizar Pedido" -->
+                    <button class="btn btn-primary" href="{% url 'detalle_pizza' datos.id %}">Realizar Pedido</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

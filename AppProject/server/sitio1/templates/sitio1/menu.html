@@ -1,0 +1,27 @@
+{% extends 'sitio1/base.html' %}
+{% load static %}
+{% block content %}
+    {% load humanize %}
+    <section id="menu" class="menu">
+        <h2 class="heading">Nuestro Menu</h2>
+            <div class="box-container">
+                {% for p in productos %}
+                    
+                        <div class="box">
+                            <div class="price"><span>$ {{p.precio | intcomma }}clp</span></div><br><br><br>
+                            {% if p.imagen %}
+                                    <img src="{{ p.imagen.url }}" alt="">
+                            {% else %}
+                               <p>No hay imagen disponible</p>
+                            {% endif %}
+                            <div class="name">{{p.nombre | title }}</div>
+                            <form action="{% url 'detalle_pizza' p.id %}" method="get">
+                              <input type="submit" value="Quiero Pedir" name="" class="btn btn-primary">
+                            </form>
+                        </div>
+                    
+                {% endfor %}
+            </div>
+    </section>
+
+{% endblock %}
